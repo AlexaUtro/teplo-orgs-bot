@@ -33,6 +33,9 @@ PHOTO = HERE / 'welcome.jpg'                                     # фото дл
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=logging.INFO)
 log = logging.getLogger('teplo-bot')
+# httpx пишет в лог полный адрес запроса вместе с токеном бота: оставляем только предупреждения
+logging.getLogger('httpx').setLevel(logging.WARNING)
+logging.getLogger('httpcore').setLevel(logging.WARNING)
 
 # ---------- тексты ----------
 # Корпоративные премиум-эмодзи (подставляются тегом <tg-emoji>; если Telegram не примет, покажется обычный эмодзи внутри тега).
@@ -70,12 +73,12 @@ def kb_new():
                                  [InlineKeyboardButton('Я уже работал(а) с вами ↗', url=f'{SITE}/rules')]])
 
 def kb_edit():
-    return InlineKeyboardMarkup([[InlineKeyboardButton('Изменить мероприятие ↗', url=f'{SITE}/event_request_change'),
-                                  InlineKeyboardButton('Повторно провести', callback_data='repeat')]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton('Изменить мероприятие ↗', url=f'{SITE}/event_request_change')],
+                                 [InlineKeyboardButton('Повторно провести', callback_data='repeat')]])
 
 def kb_action():
-    return InlineKeyboardMarkup([[InlineKeyboardButton('Отменить мероприятие', callback_data='cancel'),
-                                  InlineKeyboardButton('Помощь', callback_data='help')]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton('Отменить мероприятие', callback_data='cancel')],
+                                 [InlineKeyboardButton('Помощь', callback_data='help')]])
 
 
 # ---------- обработчики ----------
