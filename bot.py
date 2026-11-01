@@ -65,8 +65,9 @@ REPEAT_FAIL = ('Не удалось передать сообщение авто
 
 
 def kb_new():
-    return InlineKeyboardMarkup([[InlineKeyboardButton('Я у вас впервые ↗', url=f'{SITE}/terms'),
-                                  InlineKeyboardButton('Я уже работал(а) с вами ↗', url=f'{SITE}/rules')]])
+    # две кнопки одна под другой: каждая в своём ряду
+    return InlineKeyboardMarkup([[InlineKeyboardButton('Я у вас впервые ↗', url=f'{SITE}/terms')],
+                                 [InlineKeyboardButton('Я уже работал(а) с вами ↗', url=f'{SITE}/rules')]])
 
 def kb_edit():
     return InlineKeyboardMarkup([[InlineKeyboardButton('Изменить мероприятие ↗', url=f'{SITE}/event_request_change'),
